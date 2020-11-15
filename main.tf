@@ -5,7 +5,6 @@ data "aws_region" "current" {}
 resource "aws_s3_bucket" "session_logs_bucket" {
   bucket                  = var.bucket_name
   acl                     = "private"
-  region                  = data.aws_region.current.name
   force_destroy           = true
   tags                    = var.tags 
 
@@ -55,7 +54,6 @@ resource "aws_s3_bucket_public_access_block" "session_logs_bucket" {
 resource "aws_s3_bucket" "access_log_bucket" {
   bucket                  = var.access_log_bucket_name
   acl                     = "log-delivery-write"
-  region                  = data.aws_region.current.name
   force_destroy           = true
 
   tags                    = var.tags
@@ -174,7 +172,7 @@ DOC
 
 # Create EC2 Instance Role 
 resource "aws_iam_role" "ssm_role" {
-  name             = "ssm_role"
+  name             = var.iam_role_name
   path             = "/"
   tags             = var.tags
 
