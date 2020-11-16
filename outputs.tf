@@ -14,6 +14,10 @@ output "kms_key_arn" {
   value = aws_kms_key.ssmkey.arn
 }
 
+output "kms_key_id" {
+  value = aws_kms_key.ssmkey.key_id
+}
+
 output "iam_role_arn" {
   value = aws_iam_role.ssm_role.arn
 }
